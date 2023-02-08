@@ -13,7 +13,7 @@
 Программа считает сумму элементов в каждой строке и выдаёт номер строки
 с наименьшей суммой элементов: 1 строка
  */
-int NumRow (int[] array)
+int NumRow(int[] array)
 {
     int min = array[0];
     int index = 0;
@@ -25,27 +25,25 @@ int NumRow (int[] array)
             index = i;
         }
     }
-    int row = index +1;
+    int row = index + 1;
     return row;
 }
 
 int[] ArraySum(int[,] array)
 {
     int[] arraySum = new int[array.GetLength(0)];
-    // for (int k = 0; k < arraySum.Length; k++)
-    // {
-        int k = 0;
-        for (int i = 0; i < array.GetLength(0); i++)
+    int k = 0;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        int sum = 0;
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            int sum = 0;
-            for (int j = 0; j< array.GetLength(1); j++)
-            {
-                sum = sum + array[i, j];
-            }
-            arraySum[k] = sum;
-            k++;
+            sum = sum + array[i, j];
         }
-    // }
+        arraySum[k] = sum;
+        k++;
+    }
+    
     Console.WriteLine("---------------"); //разделитель
     Console.WriteLine($"{string.Join(", ", arraySum)} суммы по строкам");
     return arraySum;
@@ -91,7 +89,7 @@ int[,] matrix = NewMatrix(n, m);
 ShowResult(matrix);
 //считаем минимум по строке и возвращаем номер строки
 int[] arraySum = ArraySum(matrix);
-int numRow = NumRow (arraySum);
+int numRow = NumRow(arraySum);
 //показываем номер строки
 Console.WriteLine();
 Console.WriteLine($"{numRow} строка");

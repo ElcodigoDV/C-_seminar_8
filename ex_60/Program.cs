@@ -25,16 +25,30 @@ void ShowResult(int[,,] array)
     }
 }
 
+int RandomNum (int down, int up)
+{
+
+}
+
 int[,,] New3dArray(int height, int width, int depth)
 {
+    int [] arrayRandom = new int [height * width * depth];
     int[,,] array3d = new int[height, width, depth];
 
     for (int y = 0; y < array3d.GetLength(0); y++)
-    {
+    {   int i = 0;
         for (int x = 0; x < array3d.GetLength(1); x++)
         {
             for (int z = 0; z < array3d.GetLength(2); z++)
             {
+                while (i < arrayRandom.Length)
+                {
+                    if (arrayRandom[i] == randomNum)
+                    {
+
+                    }
+                }
+            
                 array3d[y, x, z] = new Random().Next(10,100);
             }
         }
@@ -55,8 +69,9 @@ int y = Num("Высота");
 int z = Num("Глубина");
  int[,,] array3d = New3dArray(x, y, z);
 //  ф-я создания
- //заполняем массив:
 //1.формируем одномерный массив размером № х № х №
+ int[] numArray = new int[x*y*z];
+
 //генерируем число
 //проверяем поиском есть ли число в нем
 // числа нет - добавляем в массив и заполняем ячейку

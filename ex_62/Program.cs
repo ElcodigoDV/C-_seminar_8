@@ -51,59 +51,25 @@ int[,] array = NewMatrix(m, n);
 
 int row = 0;
 int col = 0;
-// array[row, col] = num;
-num++;
-while (num <= m * n)
+int dx = 1;
+int dy = 0;
+int dirChanges = 0;
+int visits = m;
+
+for (int i = 0; i < array.Length; i++)
 {
-    if (//0 <= row +rowMove & row + rowMove < array.GetLength(0) &&
-        //0 <= col + colMove & col + colMove < array.GetLength(1) &&
-        array[row + rowMove, col + colMove] == 0)
+    array[row, col] = i + 1;
+    if (--visits == 0)
     {
-        array[row + rowMove, col + colMove] = num;
-        num++;
+        visits = m * (dirChanges % 2) + n * ((dirChanges + 1) % 2) - (dirChanges / 2 - 1) - 2;
+        int temp = dx;
+        dx = -dy;
+        dy = temp;
+        dirChanges++;
     }
-    else
-    {
-        if (colMove == 1)
-        {
-            rowMove = 1;
-            colMove = 0;
-        }
-        else
-        {
-            if (rowMove == 1)
-            {
-                rowMove = 0;
-                colMove = -1;
-            }
-            else
-            {
-                if (colMove == -1)
-                {
-                    rowMove = -1;
-                    colMove = 0;
-                }
-                else
-                {
-                    if (rowMove == -1)
-                    {
-                        rowMove = 0;
-                        colMove = 1;
-                    }
-                }
-            }
 
-        }
-
-    }
+    col += dx;
+    row += dy;
 }
-/*         num--;
-    for (int row = 0; row < array.GetLength(0); row++)
-    {
-        array[row, array.GetLength(1)-1] = num;
-        num++;
-    }
-    num--;
- */
 
 ShowResult(array);

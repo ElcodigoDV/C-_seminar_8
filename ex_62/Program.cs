@@ -27,7 +27,7 @@ int[,] NewMatrix(int row, int col)
     {
         for (int j = 0; j < col; j++)
         {
-            newMatrix[i, j] = new Random().Next(0, 10);
+            newMatrix[i, j] = 0;//new Random().Next(0, 10);
         }
     }
     return newMatrix;
@@ -40,83 +40,24 @@ int Num(string text)
     return num;
 }
 
-int m = Num("qty rows");
-int n = Num("qty colomns");
-int s = 1;
+int m = 4;//Num("qty rows");
+int n = m; //Num("qty colomns");
+int num = 1;
 
 int [,] array = NewMatrix(m, n);
 
-for (int y = 0; y < array.GetLength(1); y++) // -> right
+for (int col = 0; col < array.GetLength(1); col++)
 {
-    array[0, y] = s;
-    s++;
+    array[0, col] = num;
+    num++;
 }
-Console.WriteLine("right done");
-for (int x = 1; x < array.GetLength(0); x++) // | down
+num--;
+for (int row = 0; row < array.GetLength(0); row++)
 {
-    array[x, array.GetLength(1)-1] = s;
-    s++;
+    array[row, array.GetLength(1)-1] = num;
+    num++;
 }
-Console.WriteLine("down done");
+num--;
 
-for (int y = array.GetLength(1) - 1-1; y >= 0; y--) // <- left
-{
-    array[array.GetLength(0) - 1, y] = s;
-    s++;
-}
-Console.WriteLine("left done");
-for (int x = array.GetLength(0) - 1 - 1; x > 0; x--) // up
-{
-    array[x, 0] = s;
-    s++;
-}
-Console.WriteLine("up done");
-int c = 1;
-int d = 1;
-
-ShowResult(array);
-
-while (s < array.GetLength(0) * array.GetLength(1))
-{
-    Console.WriteLine($"while {s}");
-    while (array[c, d + 1] == 0) // ->
-    {
-        array[c, d] = s;
-        s++;
-        d++;
-    }
-
-    while (array[c + 1, d] == 0) // down
-    {
-        array[c, d] = s;
-        s++;
-        c++;
-    }
-
-    while (array[c, d - 1] == 0) // left
-    {
-        array[c, d] = s;
-        s++;
-        d--;
-    }
-
-    while (array[c - 1, d] == 0) // up
-    {
-        array[c, d] = s;
-        s++;
-        c--;
-    }
-}
-
-for (int x = 0; x < array.GetLength(0); x++)
-{
-    for (int y = 0; y < array.GetLength(1); y++)
-    {
-        if (array[x, y] == 0)
-        {
-            array[x, y] = s;
-        }
-    }
-}
 
 ShowResult(array);

@@ -8,7 +8,7 @@
 10 09 08 07
  */
 
-void ShowResult (int[,] array)
+void ShowResult(int[,] array)
 {
     for (int i = 0; i < array.GetLength(0); i++)
     {
@@ -16,7 +16,7 @@ void ShowResult (int[,] array)
         {
             Console.Write($"{array[i, j]}\t");
         }
-    Console.WriteLine();
+        Console.WriteLine();
     }
 }
 
@@ -44,20 +44,66 @@ int m = 4;//Num("qty rows");
 int n = m; //Num("qty colomns");
 int num = 1;
 
-int [,] array = NewMatrix(m, n);
+int rowMove = 0;
+int colMove = 0;
 
-for (int col = 0; col < array.GetLength(1); col++)
-{
-    array[0, col] = num;
-    num++;
-}
-num--;
-for (int row = 0; row < array.GetLength(0); row++)
-{
-    array[row, array.GetLength(1)-1] = num;
-    num++;
-}
-num--;
+int[,] array = NewMatrix(m, n);
 
+int row = 0;
+int col = 0;
+// array[row, col] = num;
+num++;
+while (num <= m * n)
+{
+    if (//0 <= row +rowMove & row + rowMove < array.GetLength(0) &&
+        //0 <= col + colMove & col + colMove < array.GetLength(1) &&
+        array[row + rowMove, col + colMove] == 0)
+    {
+        array[row + rowMove, col + colMove] = num;
+        num++;
+    }
+    else
+    {
+        if (colMove == 1)
+        {
+            rowMove = 1;
+            colMove = 0;
+        }
+        else
+        {
+            if (rowMove == 1)
+            {
+                rowMove = 0;
+                colMove = -1;
+            }
+            else
+            {
+                if (colMove == -1)
+                {
+                    rowMove = -1;
+                    colMove = 0;
+                }
+                else
+                {
+                    if (rowMove == -1)
+                    {
+                        rowMove = 0;
+                        colMove = 1;
+                    }
+                }
+            }
+
+        }
+
+    }
+}
+/*         num--;
+    for (int row = 0; row < array.GetLength(0); row++)
+    {
+        array[row, array.GetLength(1)-1] = num;
+        num++;
+    }
+    num--;
+ */
 
 ShowResult(array);
